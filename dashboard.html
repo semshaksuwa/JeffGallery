@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JEFFGALLERY</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: Arial, sans-serif;
+  background:
+  linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)),
+  url(435yj3.jpg);
+  background-size:cover;
+  background-position:center;
+  padding-top:100px;
+}
+
+/* NAVBAR */
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
+  background:#fff;
+  box-shadow:0 5px 15px rgba(0,0,0,.1);
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:1000;
+}
+
+.logo h2{
+  color:#017fc9;
+}
+
+#navbar{
+  display:flex;
+  gap:25px;
+}
+
+#navbar li{
+  list-style:none;
+}
+
+#navbar li a{
+  text-decoration:none;
+  color:#035ab8;
+  font-weight:bold;
+}
+
+#navbar li a:hover{
+  color:orange;
+}
+
+.search-box{
+  display:flex;
+  gap:10px;
+}
+
+#searchInput{
+  padding:10px;
+  width:250px;
+  border:1px solid #999;
+  border-radius:6px;
+}
+
+button{
+  padding:10px 15px;
+  border:none;
+  background:#035ab8;
+  color:#fff;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#01458f;
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:30px;
+}
+
+.hero h1{
+  font-size:40px;
+  color:#035ab8;
+}
+
+.hero p{
+  margin-top:10px;
+  color:#333;
+}
+
+/* GALLERY */
+#gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  gap:20px;
+  padding:30px;
+}
+
+.image-card{
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.image-card img{
+  width:100%;
+  height:250px;
+  object-fit:cover;
+}
+
+.card-body{
+  padding:12px;
+}
+
+.download-btn{
+  display:inline-block;
+  margin-top:10px;
+  padding:8px 14px;
+  background:#d11a1a;
+  color:#fff;
+  text-decoration:none;
+  border-radius:6px;
+}
+
+.download-btn:hover{
+  background:#a80000;
+}
+
+.active{
+  background: rgb(3, 206, 3);
+  color: white;
+}
+#loader{
+  text-align:center;
+  padding:20px;
+  font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="logo">
+    <h2>JEFFGALLERY</h2>
+  </div>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search images...">
+    <button onclick="searchImages()">Search</button>
+  </div>
+
+  <ul id="navbar">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Download Beautiful Images</h1>
+  <p>Free HD photos for your projects</p>
+</section>
+
+<!-- GALLERY -->
+<div id="gallery"></div>
+<p id="loader" style="display:none;">Loading images...</p>
+
+<script>
+/* ========= API KEYS ========= */
+const unsplashKey = "hZk0lb-eqza-gvSn9OGTIh4xzQ_pQkA6SzH9wODZ23E";
+const pexelsKey   = "mDnxSQIXieDRXeBWyzJctFeF0KcSPS43kVs6LE8gjI1q32m8ExU8nw4J";
+
+/* ========= ELEMENTS ========= */
+const gallery = document.getElementById("gallery");
+const loader  = document.getElementById("loader");
+
+let page = 1;
+let currentQuery = "nature";
+let isLoading = false;
+
+/* ========= LOAD ON START ========= */
+window.onload = () => {
+  fetchAllImages();
+};
+
+/* ========= SEARCH ========= */
+function searchImages(){
+  const input = document.getElementById("searchInput").value.trim();
+
+  if(input !== ""){
+    currentQuery = input;
+    page = 1;
+    gallery.innerHTML = "";
+    fetchAllImages();
+  }
+}
+
+/* ========= MAIN FETCH ========= */
+async function fetchAllImages(){
+  if(isLoading) return;
+
+  isLoading = true;
+  loader.style.display = "block";
+
+  await Promise.all([
+    fetchUnsplash(),
+    fetchPexels()
+  ]);
+
+  loader.style.display = "none";
+  isLoading = false;
+  page++;
+}
+
+/* ========= UNSPLASH ========= */
+async function fetchUnsplash(){
+  try{
+    const url = `https://api.unsplash.com/search/photos?query=${currentQuery}&page=${page}&per_page=6&client_id=${unsplashKey}`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    data.results.forEach(photo => {
+      createCard(
+        photo.urls.small,
+        photo.urls.full,
+        photo.user.first_name + " from Unsplash"
+      );
+    });
+
+  }catch(error){
+    console.log("Unsplash Error:", error);
+  }
+}
+
+/* ========= PEXELS ========= */
+async function fetchPexels(){
+  try{
+    const url = `https://api.pexels.com/v1/search?query=${currentQuery}&page=${page}&per_page=6`;
+
+    const res = await fetch(url,{
+      headers:{
+        Authorization: pexelsKey
+      }
+    });
+
+    const data = await res.json();
+
+    data.photos.forEach(photo => {
+      createCard(
+        photo.src.medium,
+        photo.src.original,
+        photo.photographer + " from Pexels"
+      );
+    });
+
+  }catch(error){
+    console.log("Pexels Error:", error);
+  }
+}
+
+/* ========= CREATE CARD ========= */
+function createCard(image, download, username){
+  const card = document.createElement("div");
+  card.classList.add("image-card");
+
+  card.innerHTML = `
+    <img src="${image}" alt="Image">
+
+    <div class="card-body">
+      <p><strong>${username}</strong></p>
+
+      <a href="${download}" target="_blank" class="download-btn">
+        Download
+      </a>
+    </div>
+  `;
+
+  gallery.appendChild(card);
+}
+
+/* ========= INFINITE SCROLL ========= */
+window.addEventListener("scroll", () => {
+  if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 500){
+    fetchAllImages();
+  }
+});
+</script>
+</body>
+</html>
