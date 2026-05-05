@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | JEFFGALLERY</title>
+  
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #ffffff;
+  color: #1282eb;
+}
+
+.contact-section {
+  padding: 60px 20px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: rgb(2, 101, 214);
+}
+
+p {
+  color: #bbb;
+  margin-bottom: 40px;
+}
+
+.contact-box {
+  display: flex;
+  gap: 30px;
+  background: #000000;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgb(6, 205, 255);
+}
+
+/* FORM */
+form {
+  flex: 1;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #000000;
+}
+
+textarea {
+  resize: none;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: rgb(0, 162, 255);
+  border: none;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #1d5be0;
+  transform: scale(1.03);
+}
+
+/* INFO */
+.info {
+  flex: 1;
+  text-align: left;
+  padding: 10px;
+}
+
+.info h2 {
+  color: rgb(0, 174, 255);
+  margin-bottom: 15px;
+}
+
+.info p {
+  margin-bottom: 10px;
+  color: #ccc;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .contact-box {
+    flex-direction: column;
+  }
+
+  .info {
+    text-align: center;
+  }
+}
+  </style>
+
+  
+</head>
+<body>
+
+  <section class="contact-section">
+
+    <div class="container">
+
+      <h1>Contact JEFFGALLERY</h1>
+      <p style="color: #000;">We’d love to hear from you. Send us a message anytime.</p>
+
+      <div class="contact-box">
+
+        <!-- FORM -->
+        <form>
+          <div class="input-group">
+            <input type="text" placeholder="Your Name:" required />
+          </div>
+
+          <div class="input-group">
+            <input type="email" placeholder="Your Email:" required />
+          </div>
+
+          <div class="input-group">
+            <input type="text" placeholder="Subject:" required />
+          </div>
+
+          <div class="input-group">
+            <textarea placeholder="Your Message:" rows="6" required></textarea>
+          </div>
+
+          <button type="submit">Send Message</button>
+        </form>
+
+        <!-- INFO -->
+        <div class="info">
+          <h2>Get in Touch</h2>
+          <p>Email: support@jeffgallery.com</p>
+          <p>Instagram: @jeffgallery</p>
+          <p>Twitter: @jeffgallery</p>
+          <p>We usually reply within 24–48 hours.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</body>
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(e){
+  e.preventDefault(); // stop page reload
+
+  const name = document.querySelector('input[type="text"]').value;
+  const email = document.querySelector('input[type="email"]').value;
+  const subject = document.querySelectorAll('input[type="text"]')[1].value;
+  const message = document.querySelector("textarea").value;
+
+  console.log("Name:", name);
+  console.log("Email:", email);
+  console.log("Subject:", subject);
+  console.log("Message:", message);
+
+  alert("Message sent successfully!");
+
+  // Clear form
+  this.reset();
+});
+</script>
+</html>

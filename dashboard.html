@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JEFFGALLERY</title>
+<title>JEFFGALLERY</title>  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 *{
@@ -44,20 +44,37 @@ body{
 #navbar{
   display:flex;
   gap:25px;
+  
 }
 
 #navbar li{
   list-style:none;
+  position: relative;
 }
 
 #navbar li a{
   text-decoration:none;
-  color:#035ab8;
+  color:#000000;
   font-weight:bold;
+  justify-content: space-between;
+  gap: 35px;
 }
 
-#navbar li a:hover{
-  color:orange;
+#navbar li a:hover,
+#navbar li a:active{
+  color:rgb(116, 114, 114);
+}
+
+#navbar li a:active::after,
+#navbar li a:hover::after{
+  color:rgb(3, 107, 177);
+      content: "";
+      width: 30%;
+      height: 2px;
+      background: rgb(255, 175, 3);
+      position: absolute;
+      bottom: -4px;
+      left:20px
 }
 
 .search-box{
@@ -114,6 +131,7 @@ button:hover{
   border-radius:12px;
   overflow:hidden;
   box-shadow:0 5px 15px rgba(0,0,0,.1);
+  
 }
 
 .image-card img{
@@ -161,14 +179,16 @@ button:hover{
   </div>
 
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search images...">
+    <input type="text" id="searchInput" placeholder="Search images..." 
+    onkeydown="handleEnter(event)">
     <button onclick="searchImages()">Search</button>
   </div>
 
+
   <ul id="navbar">
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Contact</a></li>
-    <li><a href="#">About</a></li>
+    <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
+    <li><a href="#"><i class="fa-solid fa-phone"></i></a></li>
+    <li><a href="about.html"><i class="fa-solid fa-circle-info"></i></a></li>
   </ul>
 </div>
 
@@ -192,7 +212,7 @@ const gallery = document.getElementById("gallery");
 const loader  = document.getElementById("loader");
 
 let page = 1;
-let currentQuery = "nature";
+let currentQuery = "ladies,games,";
 let isLoading = false;
 
 /* ========= LOAD ON START ========= */
@@ -300,6 +320,13 @@ function createCard(image, download, username){
 window.addEventListener("scroll", () => {
   if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 500){
     fetchAllImages();
+  }
+});
+
+document.getElementById("searchInput").addEventListener("keypress", function(e){
+  if(e.key === "Enter"){
+    e.preventDefault(); // stops page reload if any
+    searchImages();
   }
 });
 </script>
