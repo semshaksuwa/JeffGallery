@@ -4,14 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>JEFFGALLERY</title>
-
-  <!-- PASTE INSIDE <head> -->
-
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#00f7ff">
-<link rel="icon" href="icon-192.png">
   
-
   <!-- Font Awesome -->
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
@@ -93,31 +86,42 @@
       background-repeat:no-repeat;
       padding:120px 6% 60px;
       display:flex;
-      flex-direction:column;
+      flex-direction:row;
+      gap: 80px;
       justify-content:center;
       color:white;
     }
 
-    #hero h4{
-      font-size:22px;
-      margin-bottom:10px;
+    .hero1{
+      display: flex;
+      background-color: whitesmoke;
+      border: none;
+      height: 300px;
+      width: 700px;
+      color: black;
+      border-radius: 20px;
+      text-align: center;
+      margin:3%;
+      padding:3%;
+      box-shadow: #019297 0px 0px 20px;
+      gap: 35px;
+
     }
 
-    #hero h1{
-      color:rgb(4,168,168);
-      font-size:70px;
-      margin-bottom:15px;
-    }
+      #hero h1{
+  font-size:30px;
+  }
 
     #hero h3{
-      font-size:30px;
-      margin-bottom:10px;
+    font-size:20px;
+    }
+
+    #hero h4{
+    font-size:15px;
     }
 
     #hero h5{
-      color:rgb(223,31,31);
-      font-size:20px;
-      margin-bottom:20px;
+    font-size:16px;
     }
 
     #btn{
@@ -231,11 +235,28 @@
       font-size:14px;
     }
 
+    .image-box{
+  width:300px;
+  height:300px;
+  border-radius:20px;
+  overflow:hidden;
+  background:#ddd;
+  box-shadow: #01a7a7 0px 0px 20px;
+  
+}
+
+.image-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
     /* TABLET */
     @media (max-width:992px){
 
       #hero h1{
-        font-size:55px;
+        font-size:70px;
       }
 
       #hero h3{
@@ -264,27 +285,7 @@
         font-size:18px;
       }
 
-      #hero{
-        text-align:center;
-        align-items:center;
-        padding:140px 20px 60px;
-      }
-
-      #hero h1{
-        font: size 30px;
-      }
-
-      #hero h3{
-        font: size 20px;
-      }
-
-      #hero h4{
-        font: size 15px;
-      }
-
-      #hero h5{
-        font: size 16px;
-      }
+      
 
       .footer-container{
         flex-direction:column;
@@ -354,17 +355,31 @@
 
   <!-- HERO -->
   <section id="hero">
-    <h4 style="color: #000;">Welcome To</h4>
+    <div class="hero2">
+       <h4 style="color: #000;">Welcome To:</h4>
 
-    <h1>JEFFGALLERY.</h1>
+    <h1 style="font-size:largeer; color: #05b0b6;" >JEFFGALLERY.</h1><br>
 
     <h3 style="color: #000;">Download Background Images For Free</h3>
 
-    <h5>90% Free Download</h5>
+    <h5 style="color: rgb(235, 16, 16);">90% Free Download</h5> <br>
 
     <button id="btn">
-      <a href="dashboard.html">Visit</a>
-    </button>
+      <a href="dashboard.html">Visit</a> 
+    </button><br><br><br>
+    </div>
+   
+
+
+    <div class="hero1">
+      <div class="image-box">
+  <img src="education-scribble-02.webp" alt="Background Image">
+</div>
+    
+  <div class="image-box">
+    <img src="smiling.jpg">
+  </div>
+    </div>
   </section>
 
   <!-- FOOTER -->
@@ -392,13 +407,11 @@
         <h3>Follow Us</h3>
 
         <div class="icons">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.facebook.com/share/1E2UeQgVkX/?mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>
 
-          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="https://twitter.com/@semshakS21853"><i class="fab fa-twitter"></i></a>
 
-          <a href="#"><i class="fab fa-twitter"></i></a>
-
-          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://wa.me/2438122268429" ><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
 
@@ -409,11 +422,69 @@
     </div>
 
   </footer>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 
-<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/service-worker.js");
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  increment
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCghzssgZv-EgxhB8jVLcTK7CYUNNIL11Q",
+  authDomain: "jeffgallery-45ac1.firebaseapp.com",
+  projectId: "jeffgallery-45ac1",
+  storageBucket: "jeffgallery-45ac1.appspot.com",
+  messagingSenderId: "415183494170",
+  appId: "1:415183494170:web:7153457b83407a16e905a3"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Firestore document reference
+const statsRef = doc(db, "jeffgallery", "8CHgXo5VtsJvnjcmfCKT");
+
+// Count visitor only once per session
+async function addVisitor() {
+
+  const visited = sessionStorage.getItem("visited");
+
+  if (visited) return;
+
+  sessionStorage.setItem("visited", "true");
+
+  try {
+
+    const snap = await getDoc(statsRef);
+
+    // create document if missing
+    if (!snap.exists()) {
+      await setDoc(statsRef, {
+        visitors: 1,
+        downloads: 0
+      });
+
+      return;
+    }
+
+    // increment visitors
+    await updateDoc(statsRef, {
+      visitors: increment(1)
+    });
+
+  } catch (error) {
+    console.error("Visitor tracking failed:", error);
+  }
 }
+
+// Start tracking
+addVisitor();
 </script>
 
 </body>

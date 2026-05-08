@@ -202,6 +202,7 @@ button:hover{
   </div>
 
 
+
   <ul id="navbar">
     <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
     <li><a href="#"><i class="fa-solid fa-phone"></i></a></li>
@@ -219,7 +220,7 @@ button:hover{
 <div id="gallery"></div>
 <p id="loader" style="display:none;">Loading images...</p>
 
-<script>
+<script type="module">
 /* ========= API KEYS ========= */
 const unsplashKey = "hZk0lb-eqza-gvSn9OGTIh4xzQ_pQkA6SzH9wODZ23E";
 const pexelsKey   = "mDnxSQIXieDRXeBWyzJctFeF0KcSPS43kVs6LE8gjI1q32m8ExU8nw4J";
@@ -229,7 +230,7 @@ const gallery = document.getElementById("gallery");
 const loader  = document.getElementById("loader");
 
 let page = 1;
-let currentQuery = "ladies,games,";
+let currentQuery = "gas stations,cars at traffics, ladies";
 let isLoading = false;
 
 /* ========= LOAD ON START ========= */
@@ -315,6 +316,7 @@ async function fetchPexels(){
 
 /* ========= CREATE CARD ========= */
 function createCard(image, download, username){
+
   const card = document.createElement("div");
   card.classList.add("image-card");
 
@@ -322,10 +324,14 @@ function createCard(image, download, username){
     <img src="${image}" alt="Image">
 
     <div class="card-body">
-      <p><strong>${username}</strong></p>
+      <p>${username}</p>
 
-      <a href="${download}" target="_blank" class="download-btn">
-        Download
+      <a href="${download}"
+         download
+         target="_blank"
+         class="download-btn"
+         onclick="trackDownload()">
+         Download
       </a>
     </div>
   `;
@@ -346,6 +352,88 @@ document.getElementById("searchInput").addEventListener("keypress", function(e){
     searchImages();
   }
 });
+
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  increment
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCghzssgZv-EgxhB8jVLcTK7CYUNNIL11Q",
+  authDomain: "jeffgallery-45ac1.firebaseapp.com",
+  projectId: "jeffgallery-45ac1",
+  storageBucket: "jeffgallery-45ac1.appspot.com",
+  messagingSenderId: "415183494170",
+  appId: "1:415183494170:web:7153457b83407a16e905a3"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const statsRef = doc(db, "jeffgallery", "8CHgXo5VtsJvnjcmfCKT");
+
+// SAFE INIT (creates doc if missing)
+async function initStats() {
+  const snap = await getDoc(statsRef);
+
+  if (!snap.exists()) {
+    await setDoc(statsRef, {
+      visitors: 0,
+      downloads: 0
+    });
+  }
+}
+
+// VISITOR (safe + no crash)
+async function addVisitor() {
+  try {
+    await updateDoc(statsRef, {
+      visitors: increment(1)
+    });
+  } catch (e) {
+    console.error("Visitor update failed:", e);
+  }
+}
+
+// LOAD DATA
+async function loadStats() {
+  const snap = await getDoc(statsRef);
+
+  if (!snap.exists()) return;
+
+  const data = snap.data();
+
+  document.getElementById("visitors").innerText = data.visitors || 0;
+  document.getElementById("downloads").innerText = data.downloads || 0;
+}
+
+// DOWNLOAD TRACKER
+window.addDownload = async function () {
+  try {
+    await updateDoc(statsRef, {
+      downloads: increment(1)
+    });
+
+    loadStats();
+  } catch (e) {
+    console.error("Download update failed:", e);
+  }
+};
+
+// START
+(async function start() {
+  await initStats();
+  await addVisitor();
+  await loadStats();
+})();
+
 </script>
 </body>
 </html>
