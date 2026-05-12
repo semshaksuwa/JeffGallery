@@ -195,12 +195,14 @@ button:hover{
     <h2>JEFFGALLERY</h2>
   </div>
 
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search images..." 
-    onkeydown="handleEnter(event)">
-    <button onclick="searchImages()">Search</button>
-  </div>
 
+<div class="search-box">
+  <input type="text"
+         id="searchInput"
+         placeholder="Search images...">
+
+  <button onclick="searchImages()">Search</button>
+</div>
 
 
   <ul id="navbar">
@@ -210,6 +212,7 @@ button:hover{
   </ul>
 </div>
 
+
 <!-- HERO -->
 <section class="hero">
   <h1>Download Beautiful Images</h1>
@@ -218,19 +221,25 @@ button:hover{
 
 <!-- GALLERY -->
 <div id="gallery"></div>
-<p id="loader" style="display:none;">Loading images...</p>
+<p id="loader" style="display:none;">please wait...</p>
 
 <script type="module">
+
 /* ========= API KEYS ========= */
-const unsplashKey = "hZk0lb-eqza-gvSn9OGTIh4xzQ_pQkA6SzH9wODZ23E";
-const pexelsKey   = "mDnxSQIXieDRXeBWyzJctFeF0KcSPS43kVs6LE8gjI1q32m8ExU8nw4J";
+const unsplashKey =
+"hZk0lb-eqza-gvSn9OGTIh4xzQ_pQkA6SzH9wODZ23E";
+
+const pexelsKey =
+"mDnxSQIXieDRXeBWyzJctFeF0KcSPS43kVs6LE8gjI1q32m8ExU8nw4J";
 
 /* ========= ELEMENTS ========= */
 const gallery = document.getElementById("gallery");
 const loader  = document.getElementById("loader");
+const searchInput =
+document.getElementById("searchInput");
 
 let page = 1;
-let currentQuery = "gas stations,cars at traffics, ladies";
+let currentQuery = "nature";
 let isLoading = false;
 
 /* ========= LOAD ON START ========= */
@@ -239,59 +248,99 @@ window.onload = () => {
 };
 
 /* ========= SEARCH ========= */
-function searchImages(){
-  const input = document.getElementById("searchInput").value.trim();
+window.searchImages = async function () {
 
-  if(input !== ""){
-    currentQuery = input;
-    page = 1;
-    gallery.innerHTML = "";
-    fetchAllImages();
+  const input = searchInput.value.trim();
+
+  if(input === "") return;
+
+  currentQuery = input;
+
+  page = 1;
+
+  gallery.innerHTML = "";
+
+  await fetchAllImages();
+};
+
+/* ========= ENTER KEY ========= */
+searchInput.addEventListener("keydown", function(e){
+
+  if(e.key === "Enter"){
+
+    e.preventDefault();
+
+    searchImages();
   }
-}
+});
 
 /* ========= MAIN FETCH ========= */
 async function fetchAllImages(){
+
   if(isLoading) return;
 
   isLoading = true;
+
   loader.style.display = "block";
 
-  await Promise.all([
-    fetchUnsplash(),
-    fetchPexels()
-  ]);
+  try{
 
-  loader.style.display = "none";
-  isLoading = false;
-  page++;
+    await Promise.all([
+      fetchUnsplash(),
+      fetchPexels()
+    ]);
+
+  }catch(error){
+
+    console.log(error);
+
+  }finally{
+
+    loader.style.display = "none";
+
+    isLoading = false;
+
+    page++;
+  }
 }
 
 /* ========= UNSPLASH ========= */
 async function fetchUnsplash(){
+
   try{
-    const url = `https://api.unsplash.com/search/photos?query=${currentQuery}&page=${page}&per_page=6&client_id=${unsplashKey}`;
+
+    const url =
+    `https://api.unsplash.com/search/photos?query=${encodeURIComponent(currentQuery)}&page=${page}&per_page=6&client_id=${unsplashKey}`;
 
     const res = await fetch(url);
+
     const data = await res.json();
 
+    if(!data.results) return;
+
     data.results.forEach(photo => {
+
       createCard(
         photo.urls.small,
         photo.urls.full,
-        photo.user.first_name + " from Unsplash"
+        photo.user.name + " from Unsplash"
       );
+
     });
 
   }catch(error){
+
     console.log("Unsplash Error:", error);
   }
 }
 
 /* ========= PEXELS ========= */
 async function fetchPexels(){
+
   try{
-    const url = `https://api.pexels.com/v1/search?query=${currentQuery}&page=${page}&per_page=6`;
+
+    const url =
+    `https://api.pexels.com/v1/search?query=${encodeURIComponent(currentQuery)}&page=${page}&per_page=6`;
 
     const res = await fetch(url,{
       headers:{
@@ -301,15 +350,20 @@ async function fetchPexels(){
 
     const data = await res.json();
 
+    if(!data.photos) return;
+
     data.photos.forEach(photo => {
+
       createCard(
         photo.src.medium,
         photo.src.original,
         photo.photographer + " from Pexels"
       );
+
     });
 
   }catch(error){
+
     console.log("Pexels Error:", error);
   }
 }
@@ -318,21 +372,26 @@ async function fetchPexels(){
 function createCard(image, download, username){
 
   const card = document.createElement("div");
+
   card.classList.add("image-card");
 
   card.innerHTML = `
+
     <img src="${image}" alt="Image">
 
     <div class="card-body">
+
       <p>${username}</p>
 
       <a href="${download}"
-         download
          target="_blank"
          class="download-btn"
-         onclick="trackDownload()">
+         onclick="addDownload()">
+
          Download
+
       </a>
+
     </div>
   `;
 
@@ -341,20 +400,20 @@ function createCard(image, download, username){
 
 /* ========= INFINITE SCROLL ========= */
 window.addEventListener("scroll", () => {
-  if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 500){
+
+  if(
+    window.innerHeight + window.scrollY
+    >= document.body.offsetHeight - 500
+  ){
+
     fetchAllImages();
   }
 });
 
-document.getElementById("searchInput").addEventListener("keypress", function(e){
-  if(e.key === "Enter"){
-    e.preventDefault(); // stops page reload if any
-    searchImages();
-  }
-});
+/* ========= FIREBASE ========= */
 
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
   getFirestore,
@@ -363,75 +422,88 @@ import {
   setDoc,
   updateDoc,
   increment
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCghzssgZv-EgxhB8jVLcTK7CYUNNIL11Q",
-  authDomain: "jeffgallery-45ac1.firebaseapp.com",
-  projectId: "jeffgallery-45ac1",
-  storageBucket: "jeffgallery-45ac1.appspot.com",
-  messagingSenderId: "415183494170",
-  appId: "1:415183494170:web:7153457b83407a16e905a3"
+
+  apiKey:
+  "AIzaSyCghzssgZv-EgxhB8jVLcTK7CYUNNIL11Q",
+
+  authDomain:
+  "jeffgallery-45ac1.firebaseapp.com",
+
+  projectId:
+  "jeffgallery-45ac1",
+
+  storageBucket:
+  "jeffgallery-45ac1.appspot.com",
+
+  messagingSenderId:
+  "415183494170",
+
+  appId:
+  "1:415183494170:web:7153457b83407a16e905a3"
 };
 
 const app = initializeApp(firebaseConfig);
+
 const db = getFirestore(app);
 
-const statsRef = doc(db, "jeffgallery", "8CHgXo5VtsJvnjcmfCKT");
+const statsRef =
+doc(db, "jeffgallery", "8CHgXo5VtsJvnjcmfCKT");
 
-// SAFE INIT (creates doc if missing)
-async function initStats() {
+/* ========= INIT ========= */
+async function initStats(){
+
   const snap = await getDoc(statsRef);
 
-  if (!snap.exists()) {
-    await setDoc(statsRef, {
-      visitors: 0,
-      downloads: 0
+  if(!snap.exists()){
+
+    await setDoc(statsRef,{
+      visitors:0,
+      downloads:0
     });
   }
 }
 
-// VISITOR (safe + no crash)
-async function addVisitor() {
-  try {
-    await updateDoc(statsRef, {
+/* ========= VISITOR ========= */
+async function addVisitor(){
+
+  try{
+
+    await updateDoc(statsRef,{
       visitors: increment(1)
     });
-  } catch (e) {
-    console.error("Visitor update failed:", e);
+
+  }catch(e){
+
+    console.log(e);
   }
 }
 
-// LOAD DATA
-async function loadStats() {
-  const snap = await getDoc(statsRef);
-
-  if (!snap.exists()) return;
-
-  const data = snap.data();
-
-  document.getElementById("visitors").innerText = data.visitors || 0;
-  document.getElementById("downloads").innerText = data.downloads || 0;
-}
-
-// DOWNLOAD TRACKER
+/* ========= DOWNLOAD ========= */
 window.addDownload = async function () {
-  try {
-    await updateDoc(statsRef, {
+
+  try{
+
+    await updateDoc(statsRef,{
       downloads: increment(1)
     });
 
-    loadStats();
-  } catch (e) {
-    console.error("Download update failed:", e);
+  }catch(e){
+
+    console.log(e);
   }
 };
 
-// START
-(async function start() {
+/* ========= START ========= */
+(async function(){
+
   await initStats();
+
   await addVisitor();
-  await loadStats();
+
 })();
 
 </script>
