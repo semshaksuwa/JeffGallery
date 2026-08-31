@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://jeff-gallery.vercel.app/</loc>
+  </url>
+
+  <url>
+    <loc>https://jeff-gallery.vercel.app/about.html</loc>
+  </url>
+
+  <url>
+    <loc>https://jeff-gallery.vercel.app/contact.html</loc>
+  </url>
+
+  <url>
+    <loc>https://jeff-gallery.vercel.app/policy.html</loc>
+  </url>
+
+  <url>
+    <loc>https://jeff-gallery.vercel.app/dashboard.html</loc>
+  </url>
+
+</urlset>

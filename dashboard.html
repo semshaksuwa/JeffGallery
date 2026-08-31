@@ -148,6 +148,7 @@ button:hover{
   border-radius:12px;
   overflow:hidden;
   box-shadow:0 5px 15px rgba(0,0,0,.1);
+  transition:0.3s ease;
   
 }
 
@@ -239,7 +240,7 @@ const searchInput =
 document.getElementById("searchInput");
 
 let page = 1;
-let currentQuery = "nature";
+let currentQuery = "nature,games,life style,cars,technology,food";
 let isLoading = false;
 
 /* ========= LOAD ON START ========= */
@@ -410,100 +411,14 @@ window.addEventListener("scroll", () => {
   }
 });
 
-/* ========= FIREBASE ========= */
+/* ========= FIREBASE STATS ========= */
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { addVisitor, bindStatsUI } from "./stats.js";
 
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc,
-  increment
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+bindStatsUI();
 
-const firebaseConfig = {
-
-  apiKey:
-  "AIzaSyCghzssgZv-EgxhB8jVLcTK7CYUNNIL11Q",
-
-  authDomain:
-  "jeffgallery-45ac1.firebaseapp.com",
-
-  projectId:
-  "jeffgallery-45ac1",
-
-  storageBucket:
-  "jeffgallery-45ac1.appspot.com",
-
-  messagingSenderId:
-  "415183494170",
-
-  appId:
-  "1:415183494170:web:7153457b83407a16e905a3"
-};
-
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
-
-const statsRef =
-doc(db, "jeffgallery", "8CHgXo5VtsJvnjcmfCKT");
-
-/* ========= INIT ========= */
-async function initStats(){
-
-  const snap = await getDoc(statsRef);
-
-  if(!snap.exists()){
-
-    await setDoc(statsRef,{
-      visitors:0,
-      downloads:0
-    });
-  }
-}
-
-/* ========= VISITOR ========= */
-async function addVisitor(){
-
-  try{
-
-    await updateDoc(statsRef,{
-      visitors: increment(1)
-    });
-
-  }catch(e){
-
-    console.log(e);
-  }
-}
-
-/* ========= DOWNLOAD ========= */
-window.addDownload = async function () {
-
-  try{
-
-    await updateDoc(statsRef,{
-      downloads: increment(1)
-    });
-
-  }catch(e){
-
-    console.log(e);
-  }
-};
-
-/* ========= START ========= */
-(async function(){
-
-  await initStats();
-
+(async function () {
   await addVisitor();
-
 })();
 
 </script>

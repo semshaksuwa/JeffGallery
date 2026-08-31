@@ -161,9 +161,17 @@ window.addDownload = async function () {
 
 // START
 (async function start() {
-  await initStats();
-  await addVisitor();
-  await loadStats();
+  try {
+    console.log("Starting dashboard initialization...");
+    await initStats();
+    console.log("Stats initialized");
+    await addVisitor();
+    console.log("Visitor added");
+    await loadStats();
+    console.log("Stats loaded successfully");
+  } catch (error) {
+    console.error("Dashboard initialization error:", error);
+  }
 })();
 </script>
 

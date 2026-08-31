@@ -1,567 +1,695 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>JEFFGALLERY</title>
-  
+
+  <!-- SEO -->
+
+  <title>Semshak Suwa | JEFFGALLERY – Free HD Background Images</title>
+
+<meta
+ name="description"
+ content="JEFFGALLERY by Semshak Suwa — discover and download beautiful free HD background images for your projects, devices, and creative work."
+/>
+
+<meta
+ name="keywords"
+ content="Semshak Suwa, JEFFGALLERY, Jeff Gallery, free HD images, free background images, wallpaper, background downloads, Semshak Suwa developer"
+/>
+
+  <meta name="author" content="Semshak Suwa" />
+
+  <meta name="robots" content="index, follow" />
+
+  <meta name="googlebot" content="index, follow" />
+
+  <link
+    rel="canonical"
+    href="https://jeff-gallery.vercel.app/"
+  />
+
+  <!-- Open Graph -->
+
+  <meta property="og:type" content="website" />
+
+<meta
+ property="og:title"
+ content="Semshak Suwa | JEFFGALLERY"
+/>
+
+<meta
+ property="og:description"
+ content="JEFFGALLERY by Semshak Suwa — discover and download beautiful free HD background images."
+/>
+
+<meta
+ property="og:url"
+ content="https://jeff-gallery.vercel.app/"
+/>
+
+<meta
+ property="og:site_name"
+ content="JEFFGALLERY"
+/>
+
+<meta
+ property="og:image"
+ content="https://jeff-gallery.vercel.app/3k7qjv.jpg"
+/>
+
+  <!-- Twitter / X -->
+
+  <meta name="twitter:card" content="summary_large_image" />
+
+<meta
+ name="twitter:title"
+ content="Semshak Suwa | JEFFGALLERY"
+/>
+
+<meta
+ name="twitter:description"
+ content="Discover and download beautiful free HD background images from JEFFGALLERY."
+/>
+
+<meta
+ name="twitter:image"
+ content="https://jeff-gallery.vercel.app/3k7qjv.jpg"
+/>
+
+  <!-- Theme -->
+
+  <meta name="theme-color" content="#05b0b6" />
+
   <!-- Font Awesome -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
+  <!-- Structured Data: Person -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Semshak Suwa",
+    "url": "https://jeff-gallery.vercel.app/",
+    "sameAs": [
+      "https://www.facebook.com/share/1E2UeQgVkX/?mibextid=wwXIfr",
+      "https://twitter.com/@semshakS21853"
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: Website -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "JEFFGALLERY",
+    "alternateName": "Jeff Gallery",
+    "url": "https://jeff-gallery.vercel.app/",
+    "description": "Free HD background images and wallpapers by Semshak Suwa.",
+    "creator": {
+      "@type": "Person",
+      "name": "Semshak Suwa"
+    }
+  }
+  </script>
+
   <style>
     *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-body{
-  font-family:Arial, sans-serif;
-  overflow-x:hidden;
-}
-
-/* HEADER */
-#header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:20px 6%;
-  background:#fff;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  z-index:1000;
-}
-
-#header h1{
-  color:#000;
-  font-size:28px;
-  font-weight:bold;
-}
-
-#nav{
-  display:flex;
-  align-items:center;
-  gap:25px;
-}
-
-#nav li{
-  list-style:none;
-  position:relative;
-}
-
-#nav li a{
-  text-decoration:none;
-  color:black;
-  font-size:20px;
-  transition:0.3s ease;
-}
-
-/* HERO */
-#hero{
-  background-image:url(3k7qjv.jpg);
-  min-height:100vh;
-  width:100%;
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
-
-  padding:140px 6% 60px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:40px;
-
-  flex-wrap:wrap;
-}
-
-/* LEFT TEXT */
-.hero2{
-  flex:1;
-  min-width:280px;
-}
-
-.hero2 h1{
-  font-size:60px;
-  color:#05b0b6;
-}
-
-.hero2 h3{
-  font-size:24px;
-  color:#000;
-}
-
-.hero2 h4{
-  color:#000;
-  font-size:18px;
-}
-
-.hero2 h5{
-  color:red;
-  font-size:18px;
-}
-
-/* BUTTON */
-#btn{
-  width:140px;
-  height:50px;
-  border:none;
-  border-radius:6px;
-  background:rgb(35,172,165);
-  cursor:pointer;
-  transition:0.3s;
-}
-
-#btn a{
-  text-decoration:none;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-}
-
-#btn:hover{
-  transform:scale(1.05);
-}
-
-/* IMAGE SECTION */
-.hero1{
-  flex:1;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:20px;
-
-  flex-wrap:wrap;
-
-  background:rgba(255,255,255,0.9);
-
-  padding:25px;
-  border-radius:20px;
-
-  box-shadow:#019297 0px 0px 20px;
-
-  min-width:280px;
-}
-
-/* IMAGE BOX */
-.image-box{
-  width:100%;
-  max-width:280px;
-  height:280px;
-  transition:1.0ms
-
-  border-radius:30px;
-  overflow:hidden;
-
-  background:#ddd;
-
-  box-shadow:#01a7a7 0px 0px 20px;
-}
-
-.image-box img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-.image-box:hover{
-  transform:scale(1.05);
-  box-shadow:#05b0b6 0px 0px 30px;
-}
-
-/* FOOTER */
-.footer{
-  background: linear-gradient(135deg,#000,#0d0d0d,#111);
-  color:#fff;
-  padding:70px 8% 25px;
-  margin-top:50px;
-  border-top:2px solid #05b0b6;
-}
-
-/* CONTAINER */
-.footer-container{
-  display:flex;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:50px;
-  max-width:1200px;
-  margin:auto;
-}
-
-/* BRAND */
-.footer-brand{
-  flex:1;
-  min-width:250px;
-}
-
-.footer-brand h2{
-  font-size:32px;
-  color:#05b0b6;
-  margin-bottom:15px;
-}
-
-.footer-brand p{
-  line-height:1.8;
-  color:#ccc;
-  font-size:16px;
-}
-
-/* LINKS */
-.footer-links{
-  flex:1;
-  min-width:200px;
-}
-
-.footer-links h3{
-  margin-bottom:20px;
-  font-size:22px;
-  color:#05b0b6;
-}
-
-.footer-links a{
-  display:block;
-  text-decoration:none;
-  color:#ddd;
-  margin-bottom:12px;
-  transition:0.3s ease;
-  font-size:16px;
-}
-
-.footer-links a:hover{
-  color:#05b0b6;
-  transform:translateX(6px);
-}
-
-/* SOCIAL */
-.footer-social{
-  flex:1;
-  min-width:220px;
-}
-
-.footer-social h3{
-  margin-bottom:20px;
-  font-size:22px;
-  color:#05b0b6;
-}
-
-/* ICONS */
-.icons{
-  display:flex;
-  gap:15px;
-  margin-top:10px;
-}
-
-.icons a{
-  width:50px;
-  height:50px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  background:rgba(255,255,255,0.08);
-  color:white;
-  font-size:20px;
-  transition:0.3s ease;
-  backdrop-filter:blur(5px);
-  border:1px solid rgba(255,255,255,0.1);
-}
-
-.icons a:hover{
-  background:#05b0b6;
-  transform:translateY(-5px) scale(1.08);
-  box-shadow:0 0 20px #05b0b6;
-}
-
-/* BOTTOM */
-.footer-bottom{
-  margin-top:50px;
-  border-top:1px solid rgba(255,255,255,0.1);
-  padding-top:20px;
-  text-align:center;
-}
-
-.footer-bottom p{
-  color:#aaa;
-  font-size:15px;
-  letter-spacing:1px;
-}
-
-/* RESPONSIVE */
-@media (max-width:768px){
-
-  .footer{
-    text-align:center;
-  }
-
-  .footer-container{
-    flex-direction:column;
-    align-items:center;
-  }
-
-  .icons{
-    justify-content:center;
-  }
-
-  .footer-brand h2{
-    font-size:28px;
-  }
-}
-
-/* TABLET */
-@media (max-width:992px){
-
-  #hero{
-    flex-direction:column;
-    text-align:center;
-  }
-
-  .hero2 h1{
-    font-size:50px;
-  }
-
-  .hero2 h3{
-    font-size:22px;
-  }
-
-  .hero1{
-    width:100%;
-  }
-}
-
-/* MOBILE */
-@media (max-width:768px){
-
-  #header{
-    flex-direction:column;
-    gap:15px;
-    padding:15px 5%;
-  }
-
-  #nav{
-    gap:18px;
-  }
-
-  #hero{
-    padding-top:180px;
-  }
-
-  .hero2 h1{
-    font-size:40px;
-  }
-
-  .hero2 h3{
-    font-size:20px;
-  }
-
-  .hero2 h5{
-    font-size:16px;
-  }
-
-  .image-box{
-    max-width:100%;
-    height:240px;
-  }
-
-  .footer-container{
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-  }
-}
-
-/* SMALL MOBILE */
-@media (max-width:480px){
-
-  .hero2 h1{
-    font-size:32px;
-  }
-
-  .hero2 h3{
-    font-size:18px;
-  }
-
-  .hero2 h4,
-  .hero2 h5{
-    font-size:15px;
-  }
-
-  #btn{
-    width:120px;
-    height:45px;
-  }
-
-  .image-box{
-    height:220px;
-  }
-}
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:Arial, sans-serif;
+      overflow-x:hidden;
+    }
+
+    /* HEADER */
+    #header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:20px 6%;
+      background:#fff;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      z-index:1000;
+    }
+
+    #header h1{
+      color:#000;
+      font-size:28px;
+      font-weight:bold;
+    }
+
+    #nav{
+      display:flex;
+      align-items:center;
+      gap:25px;
+    }
+
+    #nav li{
+      list-style:none;
+      position:relative;
+    }
+
+    #nav li a{
+      text-decoration:none;
+      color:black;
+      font-size:20px;
+      transition:0.3s ease;
+    }
+
+    /* HERO */
+    #hero{
+      background-image:url(3k7qjv.jpg);
+      min-height:100vh;
+      width:100%;
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+
+      padding:140px 6% 60px;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:40px;
+
+      flex-wrap:wrap;
+    }
+
+    /* LEFT TEXT */
+    .hero2{
+      flex:1;
+      min-width:280px;
+    }
+
+    .hero2 h1{
+      font-size:60px;
+      color:#05b0b6;
+    }
+
+    .hero2 h3{
+      font-size:24px;
+      color:#000;
+    }
+
+    .hero2 h4{
+      color:#000;
+      font-size:18px;
+    }
+
+    .hero2 h5{
+      color:red;
+      font-size:18px;
+    }
+
+    /* BUTTON */
+    #btn{
+      width:140px;
+      height:50px;
+      border:none;
+      border-radius:6px;
+      background:rgb(35,172,165);
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    #btn a{
+      text-decoration:none;
+      color:white;
+      font-size:16px;
+      font-weight:bold;
+    }
+
+    #btn:hover{
+      transform:scale(1.05);
+    }
+
+    /* IMAGE SECTION */
+    .hero1{
+      flex:1;
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:20px;
+
+      flex-wrap:wrap;
+
+      background:rgba(255,255,255,0.9);
+
+      padding:25px;
+      border-radius:20px;
+
+      box-shadow:#d59706 0px 0px 20px;
+
+      min-width:280px;
+    }
+
+    /* IMAGE BOX */
+    .image-box{
+      width:100%;
+      max-width:280px;
+      height:280px;
+      transition: transform 0.3s;
+      border-radius:30px;
+      overflow:hidden;
+      background:#ddd;
+      box-shadow:#d59704 0px 0px 20px;
+    }
+
+    .image-box img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .image-box:hover{
+      transform:scale(1.05);
+      box-shadow:#ea8305 0px 0px 30px;
+    }
+
+    /* FOOTER */
+    .footer{
+      background: linear-gradient(135deg,#000,#0d0d0d,#111);
+      color:#fff;
+      padding:70px 8% 25px;
+      margin-top:50px;
+      border-top:2px solid #bbbfbf;
+    }
+
+    /* CONTAINER */
+    .footer-container{
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:50px;
+      max-width:1200px;
+      margin:auto;
+    }
+
+    /* BRAND */
+    .footer-brand{
+      flex:1;
+      min-width:250px;
+    }
+
+    .footer-brand h2{
+      font-size:32px;
+      color:#faffff;
+      margin-bottom:15px;
+    }
+
+    .footer-brand p{
+      line-height:1.8;
+      color:#ccc;
+      font-size:16px;
+    }
+
+    /* LINKS */
+    .footer-links{
+      flex:1;
+      min-width:200px;
+      text-decoration:none;
+    }
+
+    .footer-links h3{
+      margin-bottom:20px;
+      font-size:22px;
+      color:#faffff;
+      text-decoration:none;
+    }
+
+    .footer-links a{
+      display:block;
+      text-decoration:none;
+      color:#ddd;
+      margin-bottom:12px;
+      transition:0.3s ease;
+      font-size:16px;
+    }
+
+    .footer-links a:hover{
+      color:#ffffff;
+      transform:translateX(6px);
+    }
+
+    /* SOCIAL */
+    .footer-social{
+      flex:1;
+      min-width:220px;
+    }
+
+    .footer-social h3{
+      margin-bottom:20px;
+      font-size:22px;
+      color:#f8fbfb;
+    }
+
+    /* ICONS */
+    .icons{
+      display:flex;
+      gap:15px;
+      margin-top:10px;
+    }
+
+    .icons a{
+      width:50px;
+      height:50px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:rgba(255,255,255,0.08);
+      color:white;
+      font-size:20px;
+      transition:0.3s ease;
+      backdrop-filter:blur(5px);
+      border:1px solid rgba(255,255,255,0.1);
+    }
+
+    .icons a:hover{
+      background:#fffffe;
+      color:#000;
+      transform:translateY(-5px) scale(1.08);
+      box-shadow:0 0 20px #a7a6a3;
+    }
+
+    /* BOTTOM */
+    .footer-bottom{
+      margin-top:50px;
+      border-top:1px solid rgba(255,255,255,0.1);
+      padding-top:20px;
+      text-align:center;
+    }
+
+    .footer-bottom p{
+      color:#aaa;
+      font-size:15px;
+      letter-spacing:1px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width:768px){
+
+      .footer{
+        text-align:center;
+      }
+
+      .footer-container{
+        flex-direction:column;
+        align-items:center;
+      }
+
+      .icons{
+        justify-content:center;
+      }
+
+      .footer-brand h2{
+        font-size:28px;
+      }
+    }
+
+    /* TABLET */
+    @media (max-width:992px){
+
+      #hero{
+        flex-direction:column;
+        text-align:center;
+      }
+
+      .hero2 h1{
+        font-size:50px;
+      }
+
+      .hero2 h3{
+        font-size:22px;
+      }
+
+      .hero1{
+        width:100%;
+      }
+    }
+
+    /* MOBILE */
+    @media (max-width:768px){
+
+      #header{
+        flex-direction:column;
+        gap:15px;
+        padding:15px 5%;
+      }
+
+      #nav{
+        gap:18px;
+      }
+
+      #hero{
+        padding-top:180px;
+      }
+
+      .hero2 h1{
+        font-size:40px;
+      }
+
+      .hero2 h3{
+        font-size:20px;
+      }
+
+      .hero2 h5{
+        font-size:16px;
+      }
+
+      .image-box{
+        max-width:100%;
+        height:240px;
+      }
+
+      .footer-container{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+      }
+    }
+
+    /* SMALL MOBILE */
+    @media (max-width:480px){
+
+      .hero2 h1{
+        font-size:32px;
+      }
+
+      .hero2 h3{
+        font-size:18px;
+      }
+
+      .hero2 h4,
+      .hero2 h5{
+        font-size:15px;
+      }
+
+      #btn{
+        width:120px;
+        height:45px;
+      }
+
+      .image-box{
+        height:220px;
+      }
+    }
   </style>
+
 </head>
 
 <body>
 
   <!-- HEADER -->
-  <section id="header">
+
+  <header id="header">
     <h1>JEFFGALLERY.</h1>
 
-    <ul id="nav">
-      <li>
-        <a class="active" href="index.html">
-          <i class="fa-solid fa-house"></i>
-        </a>
-      </li>
+```
+<nav>
+  <ul id="nav">
+    <li>
+      <a class="active" href="index.html" aria-label="Home">
+        <i class="fa-solid fa-house"></i>
+      </a>
+    </li>
 
-      <li>
-        <a href="contact.html">
-          <i class="fa-solid fa-phone"></i>
-        </a>
-      </li>
+    <li>
+      <a href="contact.html" aria-label="Contact">
+        <i class="fa-solid fa-phone"></i>
+      </a>
+    </li>
 
-      <li>
-        <a href="about.html">
-          <i class="fa-solid fa-circle-info"></i>
-        </a>
-      </li>
-    </ul>
-  </section>
+    <li>
+      <a href="about.html" aria-label="About JEFFGALLERY">
+        <i class="fa-solid fa-circle-info"></i>
+      </a>
+    </li>
+  </ul>
+</nav>
+```
+
+  </header>
 
   <!-- HERO -->
-  <section id="hero">
-    <div class="hero2">
-       <h4 style="color: #000;">Welcome To:</h4>
 
-    <h1 style="font-size:largeer; color: #05b0b6;" >JEFFGALLERY.</h1><br>
+  <main>
+    <section id="hero">
 
-    <h3 style="color: #000;">Download Background Images For Free</h3>
+```
+  <div class="hero2">
 
-    <h5 style="color: rgb(235, 16, 16);">90% Free Download</h5> <br>
+    <h4 style="color:#000;">
+      Welcome To:
+    </h4>
+
+    <h1 style="font-size:largeer; color:#05b0b6;">
+      JEFFGALLERY.
+    </h1>
+
+    <br>
+
+    <h3 style="color:#000;">
+      Download Background Images For Free
+    </h3>
+
+    <h5 style="color:rgb(235,16,16);">
+      90% Free Download
+    </h5>
+
+    <br>
 
     <button id="btn">
-      <a href="dashboard.html">Visit</a> 
-    </button><br><br><br>
-    </div>
-   
+      <a href="dashboard.html">
+        Visit
+      </a>
+    </button>
 
+    <br><br><br>
 
-    <div class="hero1">
-      <div class="image-box">
-  <img src="education-scribble-02.webp" alt="Background Image">
-</div>
-    
-  <div class="image-box">
-    <img src="smiling.jpg">
   </div>
+
+  <div class="hero1">
+
+    <div class="image-box">
+      <img
+        src="education-scribble-02.webp"
+        alt="Free educational background image from JEFFGALLERY"
+      >
     </div>
-  </section>
+
+    <div class="image-box">
+      <img
+        src="smiling.jpg"
+        alt="Free smiling portrait background image from JEFFGALLERY"
+      >
+    </div>
+
+  </div>
+
+</section>
+```
+
+  </main>
 
   <!-- FOOTER -->
+
   <footer class="footer">
 
-    <div class="footer-container">
+```
+<div class="footer-container">
 
-      <div class="footer-brand">
-        <h2>JEFFGALLERY</h2>
-        <p>
-          Discover and download beautiful free HD images for your projects.
-        </p>
-      </div>
+  <div class="footer-brand">
+    <h2>JEFFGALLERY</h2>
 
-      <div class="footer-links">
-        <h3>Quick Links</h3>
+    <p>
+      JEFFGALLERY is a free HD image and background gallery created by
+      Semshak Suwa. Discover and download beautiful images for your
+      projects, devices, and creative work.
+    </p>
+  </div>
 
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="policy.html">Privacy Policy</a>
-      </div>
+  <div class="footer-links">
 
-      <div class="footer-social">
-        <h3>Follow Us</h3>
+    <h3>Quick Links</h3>
 
-        <div class="icons">
-          <a href="https://www.facebook.com/share/1E2UeQgVkX/?mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="policy.html">Privacy Policy</a>
 
-          <a href="https://twitter.com/@semshakS21853"><i class="fab fa-twitter"></i></a>
+  </div>
 
-          <a href="https://wa.me/2438122268429" ><i class="fab fa-whatsapp"></i></a>
-        </div>
-      </div>
+  <div class="footer-social">
+
+    <h3>Follow Us</h3>
+
+    <div class="icons">
+
+      <a
+        href="https://www.facebook.com/share/1E2UeQgVkX/?mibextid=wwXIfr"
+        aria-label="Facebook"
+      >
+        <i class="fab fa-facebook-f"></i>
+      </a>
+
+      <a
+        href="https://twitter.com/@semshakS21853"
+        aria-label="Twitter"
+      >
+        <i class="fab fa-twitter"></i>
+      </a>
+
+      <a
+        href="https://wa.me/2438122268429"
+        aria-label="WhatsApp"
+      >
+        <i class="fab fa-whatsapp"></i>
+      </a>
 
     </div>
 
-    <div class="footer-bottom">
-      <p>© 2026 JEFFGALLERY. All rights reserved.</p>
-    </div>
+  </div>
+
+</div>
+
+<div class="footer-bottom">
+
+  <p>
+    © 2026 JEFFGALLERY. Created by Semshak Suwa. All rights reserved.
+  </p>
+
+</div>
+```
 
   </footer>
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc,
-  increment
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+  <!-- VISITOR STATISTICS -->
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCghzssgZv-EgxhB8jVLcTK7CYUNNIL11Q",
-  authDomain: "jeffgallery-45ac1.firebaseapp.com",
-  projectId: "jeffgallery-45ac1",
-  storageBucket: "jeffgallery-45ac1.appspot.com",
-  messagingSenderId: "415183494170",
-  appId: "1:415183494170:web:7153457b83407a16e905a3"
-};
+  <script type="module">
+    import { addVisitor } from "./stats.js";
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// Firestore document reference
-const statsRef = doc(db, "jeffgallery", "8CHgXo5VtsJvnjcmfCKT");
-
-// Count visitor only once per session
-async function addVisitor() {
-
-  const visited = sessionStorage.getItem("visited");
-
-  if (visited) return;
-
-  sessionStorage.setItem("visited", "true");
-
-  try {
-
-    const snap = await getDoc(statsRef);
-
-    // create document if missing
-    if (!snap.exists()) {
-      await setDoc(statsRef, {
-        visitors: 1,
-        downloads: 0
-      });
-
-      return;
-    }
-
-    // increment visitors
-    await updateDoc(statsRef, {
-      visitors: increment(1)
-    });
-
-  } catch (error) {
-    console.error("Visitor tracking failed:", error);
-  }
-}
-
-// Start tracking
-addVisitor();
-</script>
+    await addVisitor();
+  </script>
 
 </body>
 </html>
